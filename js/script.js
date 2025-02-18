@@ -1,7 +1,7 @@
 //declare txtqr
 var txtqr = '';
 
-//validation to activate btn if there is input in the fieldtext and length more than 2
+
 $('.txtQR').keyup(function () {
   txtqr = $('.txtQR').val();
 
@@ -12,19 +12,28 @@ $('.txtQR').keyup(function () {
   }
 });
 
-//function when btn is clicked
 $('.qr-btn').click(function () {
   $('.qr-demo').html('');
   $('.qr-demo').qrcode({
     width: 100,
     height: 100,
-    text: txtqr,
+    text: txtqr
   });
-  //get text from input and show it as paragraph
+
   $('.textValue').html('<p>' + txtqr + ':</p>');
-  //unset some class display from none
   $('.qr-demo').css('display', '');
   $('.textValue').css('display', '');
-  //clear textfield after showing QR
+  $('.reload-btn').css('display', '');
+  $('.qr-btn').prop('disabled', true);
+  Swal.fire("its your QR Code below");
+
+  clearTxt();
+});
+
+function clearTxt(){
   $('.txtQR').val('');
+}
+
+$('.reload-btn').click(function(){
+  location.reload();
 });
